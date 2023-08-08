@@ -1,8 +1,12 @@
-import React from "react";
 import styled from "styled-components";
 
 import background1 from "../asset/korea1.jpg";
 import pet1 from "../asset/pet1.jpg";
+
+const Container = styled.div`
+	font-family: "GmarketSansMedium";
+	color: ${(props) => props.theme.fontColor};
+`;
 
 const StyledMain1 = styled.div`
 	width: 100vw;
@@ -34,7 +38,6 @@ const StyledM1title = styled.div`
 	flex-direction: column;
 	align-items: center;
 	padding: 30px;
-	/* border: 2px solid #626262; */
 `;
 
 const StyledMain2 = styled.div`
@@ -48,7 +51,6 @@ const StyledMain2 = styled.div`
 
 const StyledMtitle = styled.div`
 	font-size: 45px;
-	color: ${(props) => props.theme.fontColor};
 	&:hover {
 		cursor: pointer;
 	}
@@ -56,7 +58,6 @@ const StyledMtitle = styled.div`
 
 const StyledMSub = styled.div`
 	font-size: 25px;
-	color: ${(props) => props.theme.fontColor};
 	margin: 2%;
 	width: 100%;
 	display: flex;
@@ -72,19 +73,17 @@ const StyledM2CardBox = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* background-color: yellow; */
 `;
 
 const StyledM2Card = styled.div`
 	width: 25%;
 	height: 100%;
 	margin: 1% 3%;
-	background-color: #e9f4ff;
+	background-color: ${(props) => props.theme.mainColor};
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 40px;
-	color: ${(props) => props.theme.fontColor};
 `;
 
 const StyledMain3 = styled.div`
@@ -94,7 +93,6 @@ const StyledMain3 = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* background-color: pink; */
 `;
 
 const StyledM3CardBox = styled.div`
@@ -105,19 +103,17 @@ const StyledM3CardBox = styled.div`
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	/* background-color: yellow; */
 `;
 
 const StyledM3Card = styled.div`
 	width: 20%;
 	height: 45%;
 	margin: 1% 2%;
-	background-color: #e9f4ff;
+	background-color: ${(props) => props.theme.mainColor};
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 40px;
-	color: ${(props) => props.theme.fontColor};
 `;
 
 const StyledMain4 = styled.div`
@@ -146,7 +142,7 @@ const StyledMain4 = styled.div`
 
 function Main({ navigate }) {
 	return (
-		<div>
+		<Container>
 			<StyledMain1>
 				<StyledM1title>
 					<h1>한국여행 초보라면</h1>
@@ -206,7 +202,7 @@ function Main({ navigate }) {
 					<div>그렇다면 반려동물 관광정보를 클릭해보세요</div>
 				</StyledMSub>
 			</StyledMain4>
-		</div>
+		</Container>
 	);
 }
 

@@ -25,6 +25,10 @@ const GlobalStyle = createGlobalStyle`
   h2{
     font-size: 40px;
   }
+
+  h3{
+    font-size: 30px;
+  }
   
 `;
 
