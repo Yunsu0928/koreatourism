@@ -24,10 +24,12 @@ const GlobalStyle = createGlobalStyle`
 
   h2{
     font-size: 40px;
+    color: #5F5E5E;
   }
 
   h3{
     font-size: 30px;
+    color: #5F5E5E;
   }
   
 `;

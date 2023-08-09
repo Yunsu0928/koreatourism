@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import Main from "./components/Main";
 import Keyword from "./pages/Keyword";
+import KeyList from "./pages/KeyList";
 import Region from "./pages/Region";
+import RegionList from "./pages/RegionList";
 
 const Container = styled.div`
 	font-family: "GmarketSansMedium";
@@ -64,7 +67,7 @@ function App() {
 						한국클릭
 					</StyledLogo>
 					{/* 검색창을 키워드랑 지역별 안에 넣는게 더 효율적일까? */}
-					<StyledInput placeholder="검색어를 입력하세요" />
+					{/* <StyledInput placeholder="검색어를 입력하세요" /> */}
 					<StyledNavMenu>
 						{/* onClick(()=>{navigate("/")}) 이렇게 페이지 옮기기 Route도 같이 작업해줘야한다*/}
 						<StyledMenuButt
@@ -94,8 +97,10 @@ function App() {
 			</Container>
 			<Routes>
 				<Route path="/" element={<Main navigate={navigate} />} />
-				<Route path="/keyword" element={<Keyword />} />
-				<Route path="/region" element={<Region />} />
+				<Route path="/keyword" element={<Keyword navigate={navigate} />} />
+				<Route path="/keyword/list" element={<KeyList />} />
+				<Route path="/region" element={<Region navigate={navigate} />} />
+				<Route path="/region/list" element={<RegionList />} />
 				<Route path="/pet" element="" />
 			</Routes>
 		</>
