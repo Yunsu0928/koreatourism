@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
+
+import KeyList from "./KeyList";
+import { keywordObj } from "../data/keywordObj";
 
 const Container = styled.div`
 	padding: 60px;
@@ -6,6 +10,7 @@ const Container = styled.div`
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
+	font-family: "GmarketSansMedium";
 	color: ${(props) => props.theme.fontColor};
 `;
 
@@ -33,37 +38,28 @@ const StyledKeyCard = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
-function Keyword() {
+function Keyword({ navigate }) {
 	return (
 		<Container>
 			<h2>키워드별 관광안내</h2>
 			{/* 설명이 들어가면 좋을 것 같긴한데 흠... */}
 			<StyledKeyMain>
 				<StyledKeyBox>
-					<StyledKeyCard>
-						<h3>자연</h3>
-					</StyledKeyCard>
-					<StyledKeyCard>
-						<h3>인문</h3>
-						<h4>(문화/예술/역사)</h4>
-					</StyledKeyCard>
-					<StyledKeyCard>
-						<h3>레포츠</h3>
-					</StyledKeyCard>
-					<StyledKeyCard>
-						<h3>쇼핑</h3>
-					</StyledKeyCard>
-					<StyledKeyCard>
-						<h3>음식</h3>
-					</StyledKeyCard>
-					<StyledKeyCard>
-						<h3>숙박</h3>
-					</StyledKeyCard>
-					<StyledKeyCard>
-						<h3>추천코스</h3>
-					</StyledKeyCard>
+					{Object.keys(keywordObj).map((key) => (
+						<StyledKeyCard
+							onClick={() => {
+								navigate(`/keyword/list?type=${key}`);
+							}}
+						>
+							{/* 쿼리파라미터 뒤에물음표들어가는거  */}
+							<h3>{key}</h3>
+						</StyledKeyCard>
+					))}
 				</StyledKeyBox>
 			</StyledKeyMain>
 		</Container>
