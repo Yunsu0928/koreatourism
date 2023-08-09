@@ -91,9 +91,9 @@ function KeyList() {
 				</StyledKeyTitleBox>
 				<StyledDropMenu>
 					<select name="지역별" onChange={onChangeHandler}>
-						<option disabled selected>
+						{/* <option disabled selected>
 							지역별
-						</option>
+						</option> */}
 						{Object.keys(regionObj).map((key) => (
 							<option value={key}>{key}</option>
 						))}

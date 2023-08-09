@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-import KeyList from "./KeyList";
 import { keywordObj } from "../data/keywordObj";
 
 const Container = styled.div`
