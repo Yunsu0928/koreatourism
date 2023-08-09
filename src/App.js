@@ -6,6 +6,7 @@ import Main from "./components/Main";
 import Keyword from "./pages/Keyword";
 import KeyList from "./pages/KeyList";
 import Region from "./pages/Region";
+import RegionList from "./pages/RegionList";
 
 const Container = styled.div`
 	font-family: "GmarketSansMedium";
@@ -98,7 +99,8 @@ function App() {
 				<Route path="/" element={<Main navigate={navigate} />} />
 				<Route path="/keyword" element={<Keyword navigate={navigate} />} />
 				<Route path="/keyword/list" element={<KeyList />} />
-				<Route path="/region" element={<Region />} />
+				<Route path="/region" element={<Region navigate={navigate} />} />
+				<Route path="/region/list" element={<RegionList />} />
 				<Route path="/pet" element="" />
 			</Routes>
 		</>

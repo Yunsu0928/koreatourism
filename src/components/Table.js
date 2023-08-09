@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { keywordObj } from "../data/keywordObj";
+import emptybox from "../asset/empty-box.png";
 
 const StyledTableBox = styled.div`
 	display: flex;
@@ -13,13 +14,15 @@ const StyledTableBox = styled.div`
 const StyledTable = styled.div`
 	display: flex;
 	justify-content: space-around;
+	align-items: center;
 	background-color: white;
 	width: 100%;
-	padding: 1% 6%;
+	padding: 1% 15%;
 `;
 
 const StyledTablecolumn = styled.div`
 	font-size: 20px;
+	width: 100%;
 `;
 
 function Table({ keywordData }) {
@@ -38,8 +41,7 @@ function Table({ keywordData }) {
 						{e.firstimage ? (
 							<img src={e.firstimage} width="200px" height="100px" />
 						) : (
-							<div></div>
-							// TODO: 디폴트이미지 찾기
+							<img src={emptybox} width="200px" height="100px" />
 						)}
 					</StyledTablecolumn>
 					<StyledTablecolumn>{e.title}</StyledTablecolumn>
