@@ -6,6 +6,7 @@ const Container = styled.div`
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
+	font-family: "GmarketSansMedium";
 	color: ${(props) => props.theme.fontColor};
 `;
 
@@ -67,7 +68,8 @@ function Region() {
 			{/* 설명이 들어가면 좋을 것 같긴한데 흠... */}
 			<StyledRegMain>
 				<StyledListButt>
-					리스트버튼 어떻게 들어가야 진행이 될까 으미ㅏ어라ㅣㅁ어라ㅣㅁ어라ㅣㅁ어라ㅣ머이라머ㅣㅏ
+					리스트버튼 어떻게 들어가야 진행이 될까
+					으미ㅏ어라ㅣㅁ어라ㅣㅁ어라ㅣㅁ어라ㅣ머이라머ㅣㅏ
 				</StyledListButt>
 				<StyledRegBox>
 					{regionArr.map((e) => (
