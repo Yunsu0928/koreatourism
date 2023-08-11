@@ -31,6 +31,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: 30px;
     color: #5F5E5E;
   }
+
+  h4{
+    font-size: 25px;
+  }
   
 `;
 

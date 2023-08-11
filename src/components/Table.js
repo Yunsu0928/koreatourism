@@ -29,10 +29,12 @@ function Table({ keywordData }) {
 	return (
 		<StyledTableBox>
 			<StyledTable>
-				<StyledTablecolumn>번호</StyledTablecolumn>
-				<StyledTablecolumn>사진</StyledTablecolumn>
-				<StyledTablecolumn>관광지명</StyledTablecolumn>
-				<StyledTablecolumn>주소</StyledTablecolumn>
+				<StyledTablecolumn>
+					<h4>번호</h4>
+				</StyledTablecolumn>
+				<StyledTablecolumn><h4>사진</h4></StyledTablecolumn>
+				<StyledTablecolumn><h4>관광지명</h4></StyledTablecolumn>
+				<StyledTablecolumn><h4>주소</h4></StyledTablecolumn>
 			</StyledTable>
 			{keywordData.map((e, i) => (
 				<StyledTable>
