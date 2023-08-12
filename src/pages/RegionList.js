@@ -55,6 +55,8 @@ const StyledTableInput = styled.input`
 function KeyList() {
 	const [keywordData, setKeywordData] = useState([]);
 	const [value, setValue] = useState("서울");
+	const [areacode, setAreaCode] = useState([]);
+	const [area, setArea] = useState("시군구");
 
 	const [searchParams, setSearchParams] = useSearchParams();
 	const type = searchParams.get("type");
@@ -63,23 +65,37 @@ function KeyList() {
 
 	useEffect(() => {
 		fetch(
+			`https://apis.data.go.kr/B551011/KorService1/areaCode1?numOfRows=100&MobileOS=ETC&MobileApp=koreatourism&areaCode=${regionObj[type]}&_type=json&serviceKey=${serviceKey1}`
+		)
+			.then((res) => res.json())
+			.then((res) => {
+				let areaname = [];
+				areaname = res.response.body.items.item.map((e) => e.name);
+				setAreaCode(areaname);
+			});
+	}, [area]);
+
+	// console.log(areacode);
+
+	useEffect(() => {
+		fetch(
 			`https://apis.data.go.kr/B551011/KorService1/areaBasedList1?numOfRows=10&MobileOS=ETC&MobileApp=koreatourism&_type=json&areaCode=${regionObj[type]}&serviceKey=${serviceKey1}`
 		)
 			.then((res) => res.json())
 			.then((res) => {
-				console.log(res.response.body.items.item[0]);
+				// console.log(res.response.body.items.item[0]);
 				setKeywordData(res.response.body.items.item);
 			});
-	}, [value]);
+	}, [area]);
 
-    useEffect(()=>{
-        async function 
-    })
+	// useEffect(()=>{
+	//     async function
+	// })
 
 	// TODO: 1. 드롭다운만들어야해 2. 클릭했을때 데이터 정렬 3. 클릭한 지역명에 맞게 데이터 fetch
 
 	const onChangeHandler = (e) => {
-		setValue(e.target.value);
+		setArea(e.target.value);
 	};
 
 	// TODO: 1. 스타일 2.검색어 3. 페이지네이션
@@ -95,16 +111,16 @@ function KeyList() {
 				</StyledKeyTitleBox>
 				<StyledDropMenu>
 					<select name="지역별" onChange={onChangeHandler}>
-						{/* <option disabled selected>
-							지역별
-						</option> */}
-						{Object.keys(regionObj).map((key) => (
+						<option disabled selected>
+							시군구별
+						</option>
+						{areacode.map((key) => (
 							<option value={key}>{key}</option>
 						))}
 					</select>
 				</StyledDropMenu>
 				<StyledTableTitle>
-					<h2>{value}</h2>
+					<h2>{area}</h2>
 					<StyledTableInput placeholder="검색어를 입력하세요" />
 				</StyledTableTitle>
 				<Table keywordData={keywordData} />

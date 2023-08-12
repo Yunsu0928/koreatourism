@@ -34,7 +34,6 @@ const StyledKeyTitle = styled.h2`
 const StyledDropMenu = styled.div`
 	display: flex;
 	padding-left: 14%;
-	background-color: pink;
 `;
 
 const StyledTableTitle = styled.div`
@@ -51,6 +50,24 @@ const StyledTableInput = styled.input`
 	padding: 5px 20px;
 	font-size: 15px;
 `;
+
+const StyledDropDesign = styled.select`
+	width: 200px; /* 원하는 너비설정 */
+	padding: 0.8em 0.5em; /* 여백으로 높이 설정 */
+	font-family: "GmarketSansMedium";
+	background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+		no-repeat 95% 50%;
+	border: 1px solid #999;
+	border-radius: 0px;
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+	option {
+		background-color: white;
+	}
+`;
+
+const StyledDropOption = styled.option``;
 
 function KeyList() {
 	const [keywordData, setKeywordData] = useState([]);
@@ -90,14 +107,16 @@ function KeyList() {
 					{/* useSearchParams */}
 				</StyledKeyTitleBox>
 				<StyledDropMenu>
-					<select name="지역별" onChange={onChangeHandler}>
+					<StyledDropDesign name="지역별" onChange={onChangeHandler}>
 						{/* <option disabled selected>
 							지역별
 						</option> */}
 						{Object.keys(regionObj).map((key) => (
-							<option value={key}>{key}</option>
+							<option key={key} value={key}>
+								{key}
+							</option>
 						))}
-					</select>
+					</StyledDropDesign>
 				</StyledDropMenu>
 				<StyledTableTitle>
 					<h2>{value}</h2>
