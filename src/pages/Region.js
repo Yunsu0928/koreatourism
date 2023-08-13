@@ -43,7 +43,6 @@ function Region({ navigate }) {
 	return (
 		<Container>
 			<h2>지역별 관광안내</h2>
-			{/* 설명이 들어가면 좋을 것 같긴한데 흠... */}
 			<StyledRegMain>
 				<StyledRegBox>
 					{Object.keys(regionObj).map((key) => (

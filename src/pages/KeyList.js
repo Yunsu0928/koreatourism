@@ -34,7 +34,6 @@ const StyledKeyTitle = styled.h2`
 const StyledDropMenu = styled.div`
 	display: flex;
 	padding-left: 14%;
-	background-color: pink;
 `;
 
 const StyledTableTitle = styled.div`
@@ -51,6 +50,24 @@ const StyledTableInput = styled.input`
 	padding: 5px 20px;
 	font-size: 15px;
 `;
+
+const StyledDropDesign = styled.select`
+	width: 200px;
+	padding: 0.8em 0.5em;
+	font-family: "GmarketSansMedium";
+	background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+		no-repeat 95% 50%;
+	border: 1px solid #999;
+	border-radius: 0px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	option {
+		background-color: white;
+	}
+`;
+
+const StyledDropOption = styled.option``;
 
 function KeyList() {
 	const [keywordData, setKeywordData] = useState([]);
@@ -72,32 +89,27 @@ function KeyList() {
 			});
 	}, [value]);
 
-	// TODO: 1. 드롭다운만들어야해 2. 클릭했을때 데이터 정렬 3. 클릭한 지역명에 맞게 데이터 fetch
-
 	const onChangeHandler = (e) => {
 		setValue(e.target.value);
 	};
 
-	// TODO: 1. 스타일 2.검색어 3. 페이지네이션
+	// TODO: 2.검색어 3. 페이지네이션
 
 	return (
 		<Container>
 			<h2>키워드별 관광 리스트</h2>
-			{/* 설명이 들어가면 좋을 것 같긴한데 흠... */}
 			<StyledKeyMain>
 				<StyledKeyTitleBox>
 					<StyledKeyTitle>{type}</StyledKeyTitle>
-					{/* useSearchParams */}
 				</StyledKeyTitleBox>
 				<StyledDropMenu>
-					<select name="지역별" onChange={onChangeHandler}>
-						{/* <option disabled selected>
-							지역별
-						</option> */}
+					<StyledDropDesign name="지역별" onChange={onChangeHandler}>
 						{Object.keys(regionObj).map((key) => (
-							<option value={key}>{key}</option>
+							<option key={key} value={key}>
+								{key}
+							</option>
 						))}
-					</select>
+					</StyledDropDesign>
 				</StyledDropMenu>
 				<StyledTableTitle>
 					<h2>{value}</h2>

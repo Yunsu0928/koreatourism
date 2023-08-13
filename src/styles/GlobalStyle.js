@@ -13,7 +13,6 @@ const GlobalStyle = createGlobalStyle`
 }
 
   body {
-    /* font-family: "Helvetica", "Arial", sans-serif; */
     line-height: 1.5;
   }
 
@@ -30,6 +29,10 @@ const GlobalStyle = createGlobalStyle`
   h3{
     font-size: 30px;
     color: #5F5E5E;
+  }
+
+  h4{
+    font-size: 25px;
   }
   
 `;

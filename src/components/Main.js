@@ -189,7 +189,7 @@ function Main({ navigate }) {
 				</StyledM3CardBox>
 			</StyledMain3>
 			<StyledMain4>
-				{/* 왜 navigate가 안먹지??????? */}
+				{/* navigate 안먹으니까 수정할거면 수정하기*/}
 				<StyledMtitle
 					onClick={() => {
 						navigate("/pet");
