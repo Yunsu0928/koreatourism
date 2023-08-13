@@ -52,14 +52,14 @@ const StyledTableInput = styled.input`
 `;
 
 const StyledDropDesign = styled.select`
-	width: 200px; /* 원하는 너비설정 */
-	padding: 0.8em 0.5em; /* 여백으로 높이 설정 */
+	width: 200px;
+	padding: 0.8em 0.5em;
 	font-family: "GmarketSansMedium";
 	background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
 		no-repeat 95% 50%;
 	border: 1px solid #999;
 	border-radius: 0px;
-	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 	option {
@@ -89,28 +89,21 @@ function KeyList() {
 			});
 	}, [value]);
 
-	// TODO: 1. 드롭다운만들어야해 2. 클릭했을때 데이터 정렬 3. 클릭한 지역명에 맞게 데이터 fetch
-
 	const onChangeHandler = (e) => {
 		setValue(e.target.value);
 	};
 
-	// TODO: 1. 스타일 2.검색어 3. 페이지네이션
+	// TODO: 2.검색어 3. 페이지네이션
 
 	return (
 		<Container>
 			<h2>키워드별 관광 리스트</h2>
-			{/* 설명이 들어가면 좋을 것 같긴한데 흠... */}
 			<StyledKeyMain>
 				<StyledKeyTitleBox>
 					<StyledKeyTitle>{type}</StyledKeyTitle>
-					{/* useSearchParams */}
 				</StyledKeyTitleBox>
 				<StyledDropMenu>
 					<StyledDropDesign name="지역별" onChange={onChangeHandler}>
-						{/* <option disabled selected>
-							지역별
-						</option> */}
 						{Object.keys(regionObj).map((key) => (
 							<option key={key} value={key}>
 								{key}

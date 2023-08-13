@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { keywordObj } from "../data/keywordObj";
 import { regionObj } from "../data/regionObj";
 import Table from "../components/Table";
 
@@ -34,7 +33,6 @@ const StyledKeyTitle = styled.h2`
 const StyledDropMenu = styled.div`
 	display: flex;
 	padding-left: 14%;
-	background-color: pink;
 `;
 
 const StyledTableTitle = styled.div`
@@ -52,11 +50,27 @@ const StyledTableInput = styled.input`
 	font-size: 15px;
 `;
 
-function KeyList() {
-	const [keywordData, setKeywordData] = useState([]);
+const StyledDropDesign = styled.select`
+	width: 200px;
+	padding: 0.8em 0.5em;
+	font-family: "GmarketSansMedium";
+	background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+		no-repeat 95% 50%;
+	border: 1px solid #999;
+	border-radius: 0px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	.select option {
+		background: black;
+	}
+`;
+
+function RegionList() {
+	const [regionData, setRegionData] = useState([]);
 	const [value, setValue] = useState("서울");
 	const [areacode, setAreaCode] = useState([]);
-	const [area, setArea] = useState("시군구");
+	const [area, setArea] = useState("");
 
 	const [searchParams, setSearchParams] = useSearchParams();
 	const type = searchParams.get("type");
@@ -69,30 +83,25 @@ function KeyList() {
 		)
 			.then((res) => res.json())
 			.then((res) => {
-				let areaname = [];
-				areaname = res.response.body.items.item.map((e) => e.name);
-				setAreaCode(areaname);
+				setAreaCode(res.response.body.items.item);
+				setArea(res.response.body.items.item[0].name);
 			});
-	}, [area]);
-
-	// console.log(areacode);
+	}, []);
 
 	useEffect(() => {
 		fetch(
-			`https://apis.data.go.kr/B551011/KorService1/areaBasedList1?numOfRows=10&MobileOS=ETC&MobileApp=koreatourism&_type=json&areaCode=${regionObj[type]}&serviceKey=${serviceKey1}`
+			`https://apis.data.go.kr/B551011/KorService1/areaBasedList1?numOfRows=10&MobileOS=ETC&MobileApp=koreatourism&_type=json&areaCode=${
+				regionObj[type]
+			}&sigunguCode=${
+				areacode.find((e) => e.name === area)?.rnum
+			}&serviceKey=${serviceKey1}`
 		)
 			.then((res) => res.json())
 			.then((res) => {
-				// console.log(res.response.body.items.item[0]);
-				setKeywordData(res.response.body.items.item);
+				// console.log(res.response.body.items.item);
+				setRegionData(res.response.body.items.item);
 			});
-	}, [area]);
-
-	// useEffect(()=>{
-	//     async function
-	// })
-
-	// TODO: 1. 드롭다운만들어야해 2. 클릭했을때 데이터 정렬 3. 클릭한 지역명에 맞게 데이터 fetch
+	}, [area, areacode]);
 
 	const onChangeHandler = (e) => {
 		setArea(e.target.value);
@@ -103,30 +112,27 @@ function KeyList() {
 	return (
 		<Container>
 			<h2>키워드별 관광 리스트</h2>
-			{/* 설명이 들어가면 좋을 것 같긴한데 흠... */}
 			<StyledKeyMain>
 				<StyledKeyTitleBox>
 					<StyledKeyTitle>{type}</StyledKeyTitle>
-					{/* useSearchParams */}
 				</StyledKeyTitleBox>
 				<StyledDropMenu>
-					<select name="지역별" onChange={onChangeHandler}>
-						<option disabled selected>
-							시군구별
-						</option>
+					<StyledDropDesign name="지역별" onChange={onChangeHandler}>
 						{areacode.map((key) => (
-							<option value={key}>{key}</option>
+							<option className="option" value={key.name}>
+								{key.name}
+							</option>
 						))}
-					</select>
+					</StyledDropDesign>
 				</StyledDropMenu>
 				<StyledTableTitle>
 					<h2>{area}</h2>
 					<StyledTableInput placeholder="검색어를 입력하세요" />
 				</StyledTableTitle>
-				<Table keywordData={keywordData} />
+				<Table regionData={regionData} />
 			</StyledKeyMain>
 		</Container>
 	);
 }
 
-export default KeyList;
+export default RegionList;

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import Main from "./components/Main";
@@ -33,13 +32,13 @@ const StyledLogo = styled.div`
 	}
 `;
 
-const StyledInput = styled.input`
-	width: 600px;
-	height: 30px;
-	padding: 5px 20px;
-	border: none;
-	border-radius: 20px;
-`;
+// const StyledInput = styled.input`
+// 	width: 600px;
+// 	height: 30px;
+// 	padding: 5px 20px;
+// 	border: none;
+// 	border-radius: 20px;
+// `;
 
 const StyledNavMenu = styled.div`
 	display: flex;
@@ -69,7 +68,6 @@ function App() {
 					{/* 검색창을 키워드랑 지역별 안에 넣는게 더 효율적일까? */}
 					{/* <StyledInput placeholder="검색어를 입력하세요" /> */}
 					<StyledNavMenu>
-						{/* onClick(()=>{navigate("/")}) 이렇게 페이지 옮기기 Route도 같이 작업해줘야한다*/}
 						<StyledMenuButt
 							onClick={() => {
 								navigate("/keyword");
@@ -91,7 +89,6 @@ function App() {
 						>
 							반려동물동반 관광안내
 						</StyledMenuButt>
-						{/* <StyledMenuButt>마이페이지</StyledMenuButt> */}
 					</StyledNavMenu>
 				</StyledNav>
 			</Container>
