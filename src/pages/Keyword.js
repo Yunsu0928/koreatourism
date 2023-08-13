@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
 
 import { keywordObj } from "../data/keywordObj";
 
@@ -46,7 +45,6 @@ function Keyword({ navigate }) {
 	return (
 		<Container>
 			<h2>키워드별 관광안내</h2>
-			{/* 설명이 들어가면 좋을 것 같긴한데 흠... */}
 			<StyledKeyMain>
 				<StyledKeyBox>
 					{Object.keys(keywordObj).map((key) => (
@@ -55,7 +53,6 @@ function Keyword({ navigate }) {
 								navigate(`/keyword/list?type=${key}`);
 							}}
 						>
-							{/* 쿼리파라미터 뒤에물음표들어가는거  */}
 							<h3>{key}</h3>
 						</StyledKeyCard>
 					))}
