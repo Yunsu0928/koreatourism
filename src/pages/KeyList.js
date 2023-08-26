@@ -133,7 +133,7 @@ function KeyList() {
 		Math.ceil(totalCount / 10) > 11 ? 10 : Math.ceil(totalCount / 10);
 	const [pageNumbers, setPageNumbers] = useState(
 		new Array(initPageNum).fill().map((_, i) => i + 1)
-	); // map돌릴 페이지 배열
+	);
 
 	console.log(pageNo);
 
