@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import background1 from "../asset/korea1.jpg";
-import pet1 from "../asset/pet1.jpg";
+// import pet1 from "../asset/pet1.jpg";
 
 const Container = styled.div`
 	font-family: "GmarketSansMedium";
@@ -116,29 +116,29 @@ const StyledM3Card = styled.div`
 	font-size: 40px;
 `;
 
-const StyledMain4 = styled.div`
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-	&::before {
-		content: "";
-		background-image: url(${pet1});
-		background-size: 100vw 100vh;
-		opacity: 0.5;
-		position: absolute;
-		top: 25px;
-		left: 0;
-		right: 0;
-		bottom: 0;
-	}
-	h1 {
-		position: relative;
-	}
-`;
+// const StyledMain4 = styled.div`
+// 	width: 100vw;
+// 	height: 100vh;
+// 	display: flex;
+// 	flex-direction: column;
+// 	justify-content: center;
+// 	align-items: center;
+// 	position: relative;
+// 	&::before {
+// 		content: "";
+// 		background-image: url(${pet1});
+// 		background-size: 100vw 100vh;
+// 		opacity: 0.5;
+// 		position: absolute;
+// 		top: 25px;
+// 		left: 0;
+// 		right: 0;
+// 		bottom: 0;
+// 	}
+// 	h1 {
+// 		position: relative;
+// 	}
+// `;
 
 function Main({ navigate }) {
 	return (
@@ -188,8 +188,7 @@ function Main({ navigate }) {
 					<StyledM3Card>대전</StyledM3Card>
 				</StyledM3CardBox>
 			</StyledMain3>
-			<StyledMain4>
-				{/* navigate 안먹으니까 수정할거면 수정하기*/}
+			{/* <StyledMain4>
 				<StyledMtitle
 					onClick={() => {
 						navigate("/pet");
@@ -201,7 +200,7 @@ function Main({ navigate }) {
 					<div>반려동물과 함께 여행을 계획이 어려우셨나요?</div>
 					<div>그렇다면 반려동물 관광정보를 클릭해보세요</div>
 				</StyledMSub>
-			</StyledMain4>
+			</StyledMain4> */}
 		</Container>
 	);
 }

@@ -90,7 +90,6 @@ const StyledPageBtn = styled.button`
 	font-size: 15px;
 	border: none;
 	background-color: white;
-	/* background-color: ${(props) => props.theme.mainColor}; */
 	color: ${(props) => props.theme.fontColor};
 	cursor: pointer;
 	padding: 1%;
@@ -158,7 +157,6 @@ function RegionList() {
 		)
 			.then((res) => res.json())
 			.then((res) => {
-				// console.log(res.response.body.items.item);
 				setTotalCount(res.response.body.totalCount);
 				setRegionData(res.response.body.items.item);
 			});
@@ -167,8 +165,6 @@ function RegionList() {
 	const onChangeHandler = (e) => {
 		setArea(e.target.value);
 	};
-
-	// TODO: 1. 스타일 2.검색어 3. 페이지네이션
 
 	return (
 		<Container>

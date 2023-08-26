@@ -82,13 +82,13 @@ function App() {
 						>
 							지역별 관광안내
 						</StyledMenuButt>
-						<StyledMenuButt
+						{/* <StyledMenuButt
 							onClick={() => {
 								navigate("/pet");
 							}}
 						>
 							반려동물동반 관광안내
-						</StyledMenuButt>
+						</StyledMenuButt> */}
 					</StyledNavMenu>
 				</StyledNav>
 			</Container>
@@ -98,7 +98,7 @@ function App() {
 				<Route path="/keyword/list" element={<KeyList />} />
 				<Route path="/region" element={<Region navigate={navigate} />} />
 				<Route path="/region/list" element={<RegionList />} />
-				<Route path="/pet" element="" />
+				{/* <Route path="/pet" element="" /> */}
 			</Routes>
 		</>
 	);
