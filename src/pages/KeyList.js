@@ -68,8 +68,6 @@ const StyledDropDesign = styled.select`
 	}
 `;
 
-const StyledDropOption = styled.option``;
-
 const StyledPagination = styled.div`
 	display: flex;
 	justify-content: center;
@@ -177,7 +175,6 @@ function KeyList() {
 						onChange={handleSearch}
 					/>
 				</StyledTableTitle>
-				{/* {없으면 ? <Table keywordData={keywordData} /> : 있으면 <SearchResults searchResults={searchResults}/>} */}
 
 				{!search ? (
 					<Table keywordData={keywordData} />
@@ -185,7 +182,7 @@ function KeyList() {
 					<SearchTable searchResults={searchResults} />
 				)}
 
-				{/* 페이지네이션이 들어가야한다  */}
+				{/* 페이지네이션 */}
 				<StyledPagination>
 					<StyledPointBtn
 						onClick={() => {
