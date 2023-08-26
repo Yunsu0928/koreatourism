@@ -69,9 +69,45 @@ const StyledDropDesign = styled.select`
 
 const StyledDropOption = styled.option``;
 
+const StyledPagination = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 3% 0%;
+	width: 100%;
+`;
+
+const StyledPointBtn = styled.button`
+	width: 3%;
+	font-size: 15px;
+	border: none;
+	background-color: ${(props) => props.theme.mainColor};
+	color: ${(props) => props.theme.fontColor};
+	cursor: pointer;
+	padding: 0.2% 1%;
+`;
+
+const StyledPageBtn = styled.button`
+	width: 3%;
+	font-size: 15px;
+	border: none;
+	background-color: white;
+	/* background-color: ${(props) => props.theme.mainColor}; */
+	color: ${(props) => props.theme.fontColor};
+	cursor: pointer;
+	padding: 1%;
+	margin-right: 0.1%;
+`;
+
 function KeyList() {
 	const [keywordData, setKeywordData] = useState([]);
 	const [value, setValue] = useState("서울");
+
+	// 페이지네이션
+	const [totalCount, setTotalCount] = useState(200); // 총 (각지역별) 데이터 수
+	// fetch데이터에서 받아올 pageNo를 넣는다. = 현재페이지
+	const [pageNo, setPageNo] = useState();
+	const paginate = (number) => setPageNo(number);
 
 	const [searchParams, setSearchParams] = useSearchParams();
 	const type = searchParams.get("type");
@@ -80,20 +116,26 @@ function KeyList() {
 
 	useEffect(() => {
 		fetch(
-			`https://apis.data.go.kr/B551011/KorService1/areaBasedList1?numOfRows=10&MobileOS=ETC&MobileApp=koreatourism&_type=json&areaCode=${regionObj[value]}&cat1=${keywordObj[type]}&serviceKey=${serviceKey1}`
+			`https://apis.data.go.kr/B551011/KorService1/areaBasedList1?numOfRows=10&pageNo=${pageNo}&MobileOS=ETC&MobileApp=koreatourism&_type=json&areaCode=${regionObj[value]}&cat1=${keywordObj[type]}&serviceKey=${serviceKey1}`
 		)
 			.then((res) => res.json())
 			.then((res) => {
-				console.log(res.response.body.items.item[0]);
+				setTotalCount(res.response.body.totalCount);
 				setKeywordData(res.response.body.items.item);
 			});
-	}, [value]);
+	}, [value, pageNo]);
 
 	const onChangeHandler = (e) => {
 		setValue(e.target.value);
 	};
 
-	// TODO: 2.검색어 3. 페이지네이션
+	const initPageNum =
+		Math.ceil(totalCount / 10) > 11 ? 10 : Math.ceil(totalCount / 10);
+	const [pageNumbers, setPageNumbers] = useState(
+		new Array(initPageNum).fill().map((_, i) => i + 1)
+	); // map돌릴 페이지 배열
+
+	console.log(pageNo);
 
 	return (
 		<Container>
@@ -116,6 +158,48 @@ function KeyList() {
 					<StyledTableInput placeholder="검색어를 입력하세요" />
 				</StyledTableTitle>
 				<Table keywordData={keywordData} />
+				{/* 페이지네이션이 들어가야한다  */}
+				<StyledPagination>
+					<StyledPointBtn
+						onClick={() => {
+							if (pageNo === 1) return;
+							if (pageNo % 10 === 1) {
+								const newArr = [];
+								for (let i = pageNo - 10; i <= pageNo - 1; i++) {
+									newArr.push(i);
+								}
+								setPageNumbers(newArr);
+							}
+						}}
+					>
+						&lt;
+					</StyledPointBtn>
+					{pageNumbers.map((number) => (
+						<StyledPageBtn
+							onClick={() => {
+								paginate(number);
+							}}
+						>
+							{number}
+						</StyledPageBtn>
+					))}
+					<StyledPointBtn
+						onClick={() => {
+							if (pageNo === Math.ceil(totalCount / 10)) return;
+							setPageNo(Math.abs(pageNo + 1));
+							if (pageNo % 10 === 0) {
+								const newArr = [];
+								for (let i = pageNo + 1; i <= pageNo + 10; i++) {
+									if (i > Math.ceil(totalCount / 10)) break;
+									newArr.push(i);
+								}
+								setPageNumbers(newArr);
+							}
+						}}
+					>
+						&gt;
+					</StyledPointBtn>
+				</StyledPagination>
 			</StyledKeyMain>
 		</Container>
 	);
