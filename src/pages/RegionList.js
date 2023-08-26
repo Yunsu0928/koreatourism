@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 
 import { regionObj } from "../data/regionObj";
 import Table from "../components/Table";
+import SearchTable from "../components/SearchTable";
 
 const Container = styled.div`
 	padding: 60px;
@@ -102,6 +103,23 @@ function RegionList() {
 	const [areacode, setAreaCode] = useState([]);
 	const [area, setArea] = useState("");
 
+	// 검색기능
+	const [search, setSearch] = useState("");
+	const [searchResults, setSearchResults] = useState([]);
+	const handleSearch = (event) => {
+		const value = event.target.value;
+		setSearch(value);
+
+		if (value === "") {
+			setSearchResults([]);
+		} else {
+			const results = regionData.filter((item) => item.addr1.includes(value));
+			const results2 = regionData.filter((item) => item.title.includes(value));
+			const searchArr = [...results, ...results2];
+			setSearchResults(searchArr);
+		}
+	};
+
 	// 페이지네이션
 	const [totalCount, setTotalCount] = useState(200); // 총 (각지역별) 데이터 수
 	// fetch데이터에서 받아올 pageNo를 넣는다. = 현재페이지
@@ -170,9 +188,18 @@ function RegionList() {
 				</StyledDropMenu>
 				<StyledTableTitle>
 					<h2>{area}</h2>
-					<StyledTableInput placeholder="검색어를 입력하세요" />
+					<StyledTableInput
+						type="text"
+						placeholder="검색어를 입력하세요"
+						value={search}
+						onChange={handleSearch}
+					/>
 				</StyledTableTitle>
-				<Table regionData={regionData} />
+				{!search ? (
+					<Table regionData={regionData} />
+				) : (
+					<SearchTable searchResults={searchResults} />
+				)}
 				<StyledPagination>
 					<StyledPointBtn
 						onClick={() => {

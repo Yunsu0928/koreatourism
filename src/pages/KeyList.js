@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { keywordObj } from "../data/keywordObj";
 import { regionObj } from "../data/regionObj";
 import Table from "../components/Table";
+import SearchTable from "../components/SearchTable";
 
 const Container = styled.div`
 	padding: 60px;
@@ -100,8 +101,29 @@ const StyledPageBtn = styled.button`
 `;
 
 function KeyList() {
+	const serviceKey1 = process.env.REACT_APP_SERVICE_KEYE;
 	const [keywordData, setKeywordData] = useState([]);
 	const [value, setValue] = useState("서울");
+
+	const [searchParams, setSearchParams] = useSearchParams();
+	const type = searchParams.get("type");
+
+	// 검색기능
+	const [search, setSearch] = useState("");
+	const [searchResults, setSearchResults] = useState([]);
+	const handleSearch = (event) => {
+		const value = event.target.value;
+		setSearch(value);
+
+		if (value === "") {
+			setSearchResults([]);
+		} else {
+			const results = keywordData.filter((item) => item.addr1.includes(value));
+			const results2 = keywordData.filter((item) => item.title.includes(value));
+			const searchArr = [...results, ...results2];
+			setSearchResults(searchArr);
+		}
+	};
 
 	// 페이지네이션
 	const [totalCount, setTotalCount] = useState(200); // 총 (각지역별) 데이터 수
@@ -109,10 +131,11 @@ function KeyList() {
 	const [pageNo, setPageNo] = useState();
 	const paginate = (number) => setPageNo(number);
 
-	const [searchParams, setSearchParams] = useSearchParams();
-	const type = searchParams.get("type");
-
-	const serviceKey1 = process.env.REACT_APP_SERVICE_KEYE;
+	const initPageNum =
+		Math.ceil(totalCount / 10) > 11 ? 10 : Math.ceil(totalCount / 10);
+	const [pageNumbers, setPageNumbers] = useState(
+		new Array(initPageNum).fill().map((_, i) => i + 1)
+	);
 
 	useEffect(() => {
 		fetch(
@@ -128,14 +151,6 @@ function KeyList() {
 	const onChangeHandler = (e) => {
 		setValue(e.target.value);
 	};
-
-	const initPageNum =
-		Math.ceil(totalCount / 10) > 11 ? 10 : Math.ceil(totalCount / 10);
-	const [pageNumbers, setPageNumbers] = useState(
-		new Array(initPageNum).fill().map((_, i) => i + 1)
-	);
-
-	console.log(pageNo);
 
 	return (
 		<Container>
@@ -155,9 +170,21 @@ function KeyList() {
 				</StyledDropMenu>
 				<StyledTableTitle>
 					<h2>{value}</h2>
-					<StyledTableInput placeholder="검색어를 입력하세요" />
+					<StyledTableInput
+						type="text"
+						placeholder="검색어를 입력하세요"
+						value={search}
+						onChange={handleSearch}
+					/>
 				</StyledTableTitle>
-				<Table keywordData={keywordData} />
+				{/* {없으면 ? <Table keywordData={keywordData} /> : 있으면 <SearchResults searchResults={searchResults}/>} */}
+
+				{!search ? (
+					<Table keywordData={keywordData} />
+				) : (
+					<SearchTable searchResults={searchResults} />
+				)}
+
 				{/* 페이지네이션이 들어가야한다  */}
 				<StyledPagination>
 					<StyledPointBtn
