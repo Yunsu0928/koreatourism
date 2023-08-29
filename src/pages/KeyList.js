@@ -124,16 +124,14 @@ function KeyList() {
 	};
 
 	// 페이지네이션
-	const [totalCount, setTotalCount] = useState(200); // 총 (각지역별) 데이터 수
+	const [totalCount, setTotalCount] = useState(1); // 총 (각지역별) 데이터 수
 	// fetch데이터에서 받아올 pageNo를 넣는다. = 현재페이지
 	const [pageNo, setPageNo] = useState();
 	const paginate = (number) => setPageNo(number);
 
 	const initPageNum =
 		Math.ceil(totalCount / 10) > 11 ? 10 : Math.ceil(totalCount / 10);
-	const [pageNumbers, setPageNumbers] = useState(
-		new Array(initPageNum).fill().map((_, i) => i + 1)
-	);
+	const [pageNumbers, setPageNumbers] = useState([1]);
 
 	useEffect(() => {
 		fetch(
@@ -145,6 +143,10 @@ function KeyList() {
 				setKeywordData(res.response.body.items.item);
 			});
 	}, [value, pageNo]);
+
+	useEffect(() => {
+		setPageNumbers(new Array(initPageNum).fill().map((_, i) => i + 1));
+	}, [totalCount]);
 
 	const onChangeHandler = (e) => {
 		setValue(e.target.value);

@@ -120,7 +120,7 @@ function RegionList() {
 	};
 
 	// 페이지네이션
-	const [totalCount, setTotalCount] = useState(200); // 총 (각지역별) 데이터 수
+	const [totalCount, setTotalCount] = useState(1); // 총 (각지역별) 데이터 수
 	// fetch데이터에서 받아올 pageNo를 넣는다. = 현재페이지
 	const [pageNo, setPageNo] = useState();
 	const paginate = (number) => setPageNo(number);
@@ -132,9 +132,7 @@ function RegionList() {
 
 	const initPageNum =
 		Math.ceil(totalCount / 10) > 11 ? 10 : Math.ceil(totalCount / 10);
-	const [pageNumbers, setPageNumbers] = useState(
-		new Array(initPageNum).fill().map((_, i) => i + 1)
-	); // map돌릴 페이지 배열
+	const [pageNumbers, setPageNumbers] = useState([1]); // map돌릴 페이지 배열
 
 	useEffect(() => {
 		fetch(
@@ -161,6 +159,10 @@ function RegionList() {
 				setRegionData(res.response.body.items.item);
 			});
 	}, [area, areacode, pageNo]);
+
+	useEffect(() => {
+		setPageNumbers(new Array(initPageNum).fill().map((_, i) => i + 1));
+	}, [totalCount]);
 
 	const onChangeHandler = (e) => {
 		setArea(e.target.value);
