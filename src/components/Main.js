@@ -150,6 +150,10 @@ const StyledM3Card = styled.div`
 	justify-content: center;
 	align-items: center;
 	font-size: 40px;
+	&:hover {
+		background: skyblue;
+		color: #fff;
+	}
 
 	@media screen and (max-width: 1024px) {
 		width: 46%;
@@ -184,6 +188,7 @@ const StyledM3Card = styled.div`
 
 function Main({ navigate }) {
 	let [scrollY, setScrollY] = useState(0);
+	const topKeyword = ["자연", "음식", "추천코스"];
 
 	const targetRef1 = useRef();
 	const targetRef2 = useRef();
@@ -238,9 +243,33 @@ function Main({ navigate }) {
 				<StyledMSub>제일 인기있는 대한민국 관광지 키워드</StyledMSub>
 				<StyledM2CardBox>
 					{/* TOP3 서비스분류코드조회 */}
-					<StyledM2Card>자연</StyledM2Card>
-					<StyledM2Card>음식</StyledM2Card>
-					<StyledM2Card>추천코스</StyledM2Card>
+					<StyledM2Card
+						onClick={() => {
+							navigate("/keyword/list?type=자연");
+						}}
+					>
+						자연
+					</StyledM2Card>
+					<StyledM2Card
+						onClick={() => {
+							navigate("/keyword/list?type=음식");
+						}}
+					>
+						음식
+					</StyledM2Card>
+					<StyledM2Card
+						onClick={() => {
+							navigate("/keyword/list?type=추천코스");
+						}}
+					>
+						추천코스
+					</StyledM2Card>
+					{/* {topKeyword.forEach((item) => {
+						item.addEventListener("mouseover", ()=>{
+							// 만약 true면 상자가 보이고 false면 접혀있게 만들기
+							// useState사용해서 진행하기 
+						})
+					})} */}
 				</StyledM2CardBox>
 			</StyledMain2>
 			<StyledMain3 ref={targetRef2}>
@@ -256,14 +285,62 @@ function Main({ navigate }) {
 					<div>17개의 지역으로 구분되어있는 지역별 관광정보</div>
 				</StyledMSub>
 				<StyledM3CardBox>
-					<StyledM3Card>서울</StyledM3Card>
-					<StyledM3Card>인천</StyledM3Card>
-					<StyledM3Card>제주도</StyledM3Card>
-					<StyledM3Card>강원도</StyledM3Card>
-					<StyledM3Card>경기도</StyledM3Card>
-					<StyledM3Card>대구</StyledM3Card>
-					<StyledM3Card>부산</StyledM3Card>
-					<StyledM3Card>대전</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=서울");
+						}}
+					>
+						서울
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=인천");
+						}}
+					>
+						인천
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=제주도");
+						}}
+					>
+						제주도
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=강원도");
+						}}
+					>
+						강원도
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=경기도");
+						}}
+					>
+						경기도
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=대구");
+						}}
+					>
+						대구
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=부산");
+						}}
+					>
+						부산
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=대전");
+						}}
+					>
+						대전
+					</StyledM3Card>
 				</StyledM3CardBox>
 			</StyledMain3>
 			{/* <StyledMain4>
