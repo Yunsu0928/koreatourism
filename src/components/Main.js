@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { useState, useEffect, useRef } from "react";
 
 import background1 from "../asset/korea1.jpg";
+import { cleanup } from "@testing-library/react";
 // import pet1 from "../asset/pet1.jpg";
 
 const Container = styled.div`
@@ -38,6 +40,15 @@ const StyledM1title = styled.div`
 	flex-direction: column;
 	align-items: center;
 	padding: 30px;
+	text-align: center;
+	transition: all 1s;
+	opacity: 0;
+
+	@media screen and (max-width: 1024px) {
+		h1 {
+			font-size: 45px;
+		}
+	}
 `;
 
 const StyledMain2 = styled.div`
@@ -47,12 +58,17 @@ const StyledMain2 = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	opacity: 0;
+	transition: all 0.8s;
 `;
 
 const StyledMtitle = styled.div`
 	font-size: 45px;
-	&:hover {
-		cursor: pointer;
+	text-align: center;
+	cursor: pointer;
+
+	@media screen and (max-width: 1024px) {
+		font-size: 30px;
 	}
 `;
 
@@ -64,15 +80,23 @@ const StyledMSub = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	@media screen and (max-width: 1024px) {
+		font-size: 18px;
+	}
 `;
 
 const StyledM2CardBox = styled.div`
 	width: 70%;
-	height: 40%;
+	height: 400px;
 	padding: 1%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	@media screen and (max-width: 1024px) {
+		flex-direction: column;
+	}
 `;
 
 const StyledM2Card = styled.div`
@@ -84,6 +108,16 @@ const StyledM2Card = styled.div`
 	justify-content: center;
 	align-items: center;
 	font-size: 40px;
+	transition: all 0.5s;
+	&:hover {
+		background: skyblue;
+		color: #fff;
+	}
+	@media screen and (max-width: 1024px) {
+		width: 100%;
+		height: 100px;
+		font-size: 22px;
+	}
 `;
 
 const StyledMain3 = styled.div`
@@ -93,6 +127,8 @@ const StyledMain3 = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	opacity: 0;
+	transition: all 0.8s;
 `;
 
 const StyledM3CardBox = styled.div`
@@ -114,6 +150,16 @@ const StyledM3Card = styled.div`
 	justify-content: center;
 	align-items: center;
 	font-size: 40px;
+	&:hover {
+		background: skyblue;
+		color: #fff;
+	}
+
+	@media screen and (max-width: 1024px) {
+		width: 46%;
+		height: 100px;
+		font-size: 22px;
+	}
 `;
 
 // const StyledMain4 = styled.div`
@@ -141,15 +187,52 @@ const StyledM3Card = styled.div`
 // `;
 
 function Main({ navigate }) {
+	let [scrollY, setScrollY] = useState(0);
+	const topKeyword = ["자연", "음식", "추천코스"];
+
+	const targetRef1 = useRef();
+	const targetRef2 = useRef();
+	const mainTitle = useRef();
+
+	useEffect(() => {
+		// 이벤트가 계속 발생하는 걸 다루는 2가지
+		// 쓰로틀링, 디바운스  >> 연속적으로 이벤트가 발생할때 이전 이벤트를 어떻게 처리할거냐? ( 스크롤이벤트 같은 경우, 버튼 무한클릭)
+		// 1. 이전 이벤트를 무시하고 새로운 이벤트 핸들러를 실행한다 (쓰로틀링 / settimeout, lodash)
+		// 2. 일정 시간동안 같은 이벤트가 발생하지 않도록 조절한다 // 1초, 2초 등 시간을 줘서 무시하게 한다 (디바운스)
+		mainTitle.current.style.opacity = 1;
+		window.addEventListener("scroll", () => {
+			console.log("adfadfadf");
+			setScrollY(window.scrollY + window.innerHeight);
+		});
+		return () => {
+			window.removeEventListener("scroll", () => {
+				setScrollY(window.scrollY + window.innerHeight);
+			});
+		};
+	}, []);
+
+	useEffect(() => {
+		if (scrollY > targetRef1.current.offsetTop + 500) {
+			targetRef1.current.style.opacity = 1;
+		} else {
+			targetRef1.current.style.opacity = 0;
+		}
+		if (scrollY > targetRef2.current.offsetTop + 500) {
+			targetRef2.current.style.opacity = 1;
+		} else {
+			targetRef2.current.style.opacity = 0;
+		}
+	}, [scrollY]);
+
 	return (
 		<Container>
 			<StyledMain1>
-				<StyledM1title>
+				<StyledM1title ref={mainTitle}>
 					<h1>한국여행 초보라면</h1>
 					<h1>바로 한국클릭</h1>
 				</StyledM1title>
 			</StyledMain1>
-			<StyledMain2>
+			<StyledMain2 ref={targetRef1}>
 				<StyledMtitle
 					onClick={() => {
 						navigate("/keyword");
@@ -160,12 +243,36 @@ function Main({ navigate }) {
 				<StyledMSub>제일 인기있는 대한민국 관광지 키워드</StyledMSub>
 				<StyledM2CardBox>
 					{/* TOP3 서비스분류코드조회 */}
-					<StyledM2Card>자연</StyledM2Card>
-					<StyledM2Card>음식</StyledM2Card>
-					<StyledM2Card>추천코스</StyledM2Card>
+					<StyledM2Card
+						onClick={() => {
+							navigate("/keyword/list?type=자연");
+						}}
+					>
+						자연
+					</StyledM2Card>
+					<StyledM2Card
+						onClick={() => {
+							navigate("/keyword/list?type=음식");
+						}}
+					>
+						음식
+					</StyledM2Card>
+					<StyledM2Card
+						onClick={() => {
+							navigate("/keyword/list?type=추천코스");
+						}}
+					>
+						추천코스
+					</StyledM2Card>
+					{/* {topKeyword.forEach((item) => {
+						item.addEventListener("mouseover", ()=>{
+							// 만약 true면 상자가 보이고 false면 접혀있게 만들기
+							// useState사용해서 진행하기 
+						})
+					})} */}
 				</StyledM2CardBox>
 			</StyledMain2>
-			<StyledMain3>
+			<StyledMain3 ref={targetRef2}>
 				<StyledMtitle
 					onClick={() => {
 						navigate("/region");
@@ -178,14 +285,62 @@ function Main({ navigate }) {
 					<div>17개의 지역으로 구분되어있는 지역별 관광정보</div>
 				</StyledMSub>
 				<StyledM3CardBox>
-					<StyledM3Card>서울</StyledM3Card>
-					<StyledM3Card>인천</StyledM3Card>
-					<StyledM3Card>제주도</StyledM3Card>
-					<StyledM3Card>강원도</StyledM3Card>
-					<StyledM3Card>경기도</StyledM3Card>
-					<StyledM3Card>대구</StyledM3Card>
-					<StyledM3Card>부산</StyledM3Card>
-					<StyledM3Card>대전</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=서울");
+						}}
+					>
+						서울
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=인천");
+						}}
+					>
+						인천
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=제주도");
+						}}
+					>
+						제주도
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=강원도");
+						}}
+					>
+						강원도
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=경기도");
+						}}
+					>
+						경기도
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=대구");
+						}}
+					>
+						대구
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=부산");
+						}}
+					>
+						부산
+					</StyledM3Card>
+					<StyledM3Card
+						onClick={() => {
+							navigate("/region/list?type=대전");
+						}}
+					>
+						대전
+					</StyledM3Card>
 				</StyledM3CardBox>
 			</StyledMain3>
 			{/* <StyledMain4>
