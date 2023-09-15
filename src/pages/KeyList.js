@@ -106,7 +106,6 @@ function KeyList() {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const type = searchParams.get("type");
 
-	// 검색기능
 	const [search, setSearch] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
 	const handleSearch = (event) => {
@@ -123,7 +122,6 @@ function KeyList() {
 		}
 	};
 
-	// 페이지네이션
 	const [totalCount, setTotalCount] = useState(1); // 총 (각지역별) 데이터 수
 	// fetch데이터에서 받아올 pageNo를 넣는다. = 현재페이지
 	const [pageNo, setPageNo] = useState();
