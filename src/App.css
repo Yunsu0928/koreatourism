@@ -1,0 +1,241 @@
+.only_m {
+	display: none;
+}
+
+.main_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	background: url("../imgs/mainBg.png") no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.main_container > .inner {
+	position: relative;
+	max-width: 1440px;
+	width: 100%;
+	height: 100%;
+}
+
+.main_title_area {
+	position: absolute;
+	left: 0;
+	bottom: 185px;
+	color: #fff;
+}
+
+.main_title_sub {
+	position: relative;
+	font-size: 32px;
+	font-weight: 300;
+	margin-bottom: 20px;
+}
+
+.main_title_sub:after {
+	content: "";
+	display: block;
+	width: 240px;
+	height: 1px;
+	background: #fff;
+	position: absolute;
+	top: 15px;
+	right: 0;
+}
+
+.main_title {
+	font-size: 140px;
+	font-weight: bold;
+}
+
+/* 관광지 TOP 키워드 */
+
+.keyword_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+}
+
+.keyword_container > .inner {
+	max-width: 1440px;
+	width: 100%;
+	height: 100%;
+	padding: 150px 0;
+}
+
+.keyword_container .title_area {
+	text-align: center;
+	margin-bottom: 70px;
+}
+
+.keyword_container .title_area h2 {
+	font-size: 60px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.keyword_container .title_area p {
+	font-size: 24px;
+	font-weight: 300;
+}
+
+.keyword_contents_area {
+	width: 100%;
+	display: flex;
+}
+
+.keyword_content {
+	position: relative;
+	width: 196px;
+	height: 482px;
+	border-radius: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	transition: all 1.2s;
+}
+
+.keyword_content:first-child {
+	margin-right: 20px;
+}
+
+.keyword_content:last-child {
+	margin-left: 20px;
+}
+
+.keyword_content.on {
+	flex-grow: 1;
+}
+
+.keyword_bg_area {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	filter: blur(0px);
+}
+
+.keyword_content.on .keyword_bg_area {
+	filter: blur(0px);
+	background-color: #fff;
+}
+
+.keyword_content.tree .keyword_bg_area {
+	background: url("../imgs/top_bg1.png") rgba(0, 0, 0, 0.8) no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.keyword_content.food .keyword_bg_area {
+	background: url("../imgs/top_bg2.png") rgba(0, 0, 0, 0.8) no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.keyword_content.thumbs .keyword_bg_area {
+	background: url("../imgs/top_bg3.png") rgba(0, 0, 0, 0.8) no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.keyword_inner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+}
+
+.keyword_inner .tree_icon {
+	background: url("../imgs/top_tree.png") no-repeat;
+	background-size: contain;
+}
+.keyword_inner .food_icon {
+	background: url("../imgs/top_food.png") no-repeat;
+	background-size: contain;
+}
+.keyword_inner .thumbs_icon {
+	background: url("../imgs/top_thumbs.png") no-repeat;
+	background-size: contain;
+}
+
+.keyword_inner .keyword_img {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+}
+
+.keyword_inner h3 {
+	font-size: 24px;
+	font-weight: 600;
+	margin: 7px 0 10px 0;
+}
+
+.keyword_inner p {
+	font-size: 16px;
+	font-weight: 300;
+	opacity: 0;
+	transition: opacity 0.3s;
+	transition-delay: 0.2s;
+}
+
+.keyword_content.on .keyword_inner p {
+	opacity: 1;
+}
+
+@media (max-width: 1440px) {
+	html {
+		font-size: 14px;
+	}
+
+	.only_m {
+		display: block;
+	}
+
+	.main_container > .inner {
+		padding: 2rem;
+	}
+
+	.main_title {
+		font-size: 6rem;
+	}
+	.keyword_content {
+		width: 15%;
+	}
+
+	.keyword_container > .inner {
+		padding: 8rem 2rem;
+	}
+
+	.keyword_container .title_area h2 {
+		font-size: 2.8rem;
+		margin-bottom: 15px;
+	}
+
+	.keyword_container .title_area p {
+		font-size: 1rem;
+	}
+
+	.keyword_inner .keyword_img {
+		width: 2.3rem;
+		height: 2.3rem;
+	}
+	.keyword_inner h3 {
+		font-size: 1.2rem;
+	}
+
+	.keyword_inner p {
+		font-size: 0.9rem;
+	}
+}
