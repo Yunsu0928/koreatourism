@@ -4,12 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import background1 from "../asset/korea1.jpg";
 import { PiBowlFood, PiTree, PiThumbsUpBold } from "react-icons/pi";
 import topbg1 from "../asset/top_bg1.png";
-import topbg11 from "../asset/topbg1.jpeg";
 import topbg2 from "../asset/top_bg2.png";
 import topbg3 from "../asset/top_bg3.png";
-
-// import { cleanup } from "@testing-library/react";
-// import pet1 from "../asset/pet1.jpg";
 
 const Container = styled.div`
 	font-family: "GmarketSansMedium";
@@ -104,87 +100,6 @@ const StyledMSub = styled.div`
 		font-size: 18px;
 	}
 `;
-
-const StyledM2CardBox = styled.div`
-	width: 70%;
-	height: 400px;
-	padding: 1%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	@media screen and (max-width: 1024px) {
-		flex-direction: column;
-	}
-`;
-
-const StyledM2Card = styled.div`
-	width: 25%;
-	height: 100%;
-	margin: 1% 3%;
-	background-color: ${(props) => props.theme.mainColor};
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 40px;
-	transition: all 0.5s;
-	&:hover {
-		background: skyblue;
-		color: #fff;
-	}
-	@media screen and (max-width: 1024px) {
-		width: 100%;
-		height: 100px;
-		font-size: 22px;
-	}
-`;
-
-const StyledMain3 = styled.div`
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	opacity: 0;
-	transition: all 0.8s;
-`;
-
-const StyledM3CardBox = styled.div`
-	width: 70%;
-	height: 55%;
-	padding: 1%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-`;
-
-const StyledM3Card = styled.div`
-	width: 20%;
-	height: 45%;
-	margin: 1% 2%;
-	background-color: ${(props) => props.theme.mainColor};
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 40px;
-	&:hover {
-		background: skyblue;
-		color: #fff;
-	}
-
-	@media screen and (max-width: 1024px) {
-		width: 46%;
-		height: 100px;
-		font-size: 22px;
-	}
-`;
-
-const StyledKeyTOP = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
 const StyledKeyTitle = styled.div`
 	text-align: center;
 	cursor: pointer;
@@ -236,13 +151,16 @@ const StyledTopTree = styled.div`
 	svg {
 		width: 30px;
 		height: 30px;
+		margin: 10px;
 	}
 	h3 {
 		color: #5f5e5e;
 		font-weight: bold;
+		margin: 0px;
 	}
 	p {
-		font-size: 20px;
+		margin: 0px;
+		font-size: 15px;
 		visibility: hidden;
 		font-weight: bold;
 	}
@@ -271,15 +189,18 @@ const StyledTopFood = styled.div`
 	border-radius: 30px;
 	transition: all 1s;
 	svg {
+		margin: 10px;
 		width: 30px;
 		height: 30px;
 	}
 	h3 {
+		margin: 0px;
 		color: #5f5e5e;
 		font-weight: bold;
 	}
 	p {
-		font-size: 20px;
+		margin: 0px;
+		font-size: 15px;
 		visibility: hidden;
 		font-weight: bold;
 	}
@@ -308,15 +229,18 @@ const StyledTopThumbs = styled.div`
 	border-radius: 30px;
 	transition: all 1s;
 	svg {
+		margin: 10px;
 		width: 25px;
 		height: 25px;
 	}
 	h3 {
+		margin: 0px;
 		color: #5f5e5e;
 		font-weight: bold;
 	}
 	p {
-		font-size: 20px;
+		margin: 0px;
+		font-size: 15px;
 		visibility: hidden;
 		font-weight: bold;
 	}
@@ -326,6 +250,48 @@ const StyledTopThumbs = styled.div`
 		p {
 			visibility: visible;
 		}
+	}
+`;
+
+const StyledMain3 = styled.div`
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: all 0.8s;
+`;
+
+const StyledM3CardBox = styled.div`
+	width: 70%;
+	height: 55%;
+	padding: 1%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+`;
+
+const StyledM3Card = styled.div`
+	width: 20%;
+	height: 45%;
+	margin: 1% 2%;
+	background-color: ${(props) => props.theme.mainColor};
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 40px;
+	&:hover {
+		background: skyblue;
+		color: #fff;
+	}
+
+	@media screen and (max-width: 1024px) {
+		width: 46%;
+		height: 100px;
+		font-size: 22px;
 	}
 `;
 
@@ -380,45 +346,6 @@ function Main({ navigate }) {
 				</StyledM1title>
 			</StyledMain1>
 			<StyledMain2 ref={targetRef1}>
-				{/* <StyledMtitle
-					onClick={() => {
-						navigate("/keyword");
-					}}
-				>
-					관광지 TOP 키워드
-				</StyledMtitle>
-				<StyledMSub>제일 인기있는 대한민국 관광지 키워드</StyledMSub>
-				<StyledM2CardBox>
-					<StyledM2Card
-						onClick={() => {
-							navigate("/keyword/list?type=자연");
-						}}
-					>
-						자연
-					</StyledM2Card>
-					<StyledM2Card
-						onClick={() => {
-							navigate("/keyword/list?type=음식");
-						}}
-					>
-						음식
-					</StyledM2Card>
-					<StyledM2Card
-						onClick={() => {
-							navigate("/keyword/list?type=추천코스");
-						}}
-					>
-						추천코스
-					</StyledM2Card> */}
-				{/* {topKeyword.forEach((item) => {
-						item.addEventListener("mouseover", ()=>{
-							// 만약 true면 상자가 보이고 false면 접혀있게 만들기
-							// useState사용해서 진행하기 
-						})
-					})} */}
-				{/* </StyledM2CardBox> */}
-
-				{/* <StyledKeyTOP> */}
 				<StyledKeyTitle>
 					<h2
 						onClick={() => {
@@ -458,7 +385,6 @@ function Main({ navigate }) {
 						<p>추천코스로 보는 인기 있는 관광지</p>
 					</StyledTopThumbs>
 				</StyledTop3Box>
-				{/* </StyledKeyTOP> */}
 			</StyledMain2>
 			<StyledMain3 ref={targetRef2}>
 				<StyledMtitle
