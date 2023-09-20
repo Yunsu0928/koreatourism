@@ -34,18 +34,23 @@ const StyledKeyTitle = styled.h2`
 
 const StyledDropMenu = styled.div`
 	display: flex;
-	padding-left: 14%;
+	justify-content: space-between;
+	margin-left: 14%;
+	margin-right: 14%;
+	padding: 1%;
+	border: 4px dashed ${(props) => props.theme.mainColor};
 `;
 
 const StyledTableTitle = styled.div`
 	display: flex;
-	justify-content: space-around;
+	justify-content: baseline;
 	align-items: center;
+	margin-left: 250px;
 `;
 
 const StyledTableInput = styled.input`
 	width: 40%;
-	height: 30%;
+	height: 100%;
 	border: 1px solid gray;
 	border-radius: 20px;
 	padding: 5px 20px;
@@ -165,15 +170,15 @@ function KeyList() {
 							</option>
 						))}
 					</StyledDropDesign>
-				</StyledDropMenu>
-				<StyledTableTitle>
-					<h2>{value}</h2>
 					<StyledTableInput
 						type="text"
 						placeholder="검색어를 입력하세요"
 						value={search}
 						onChange={handleSearch}
 					/>
+				</StyledDropMenu>
+				<StyledTableTitle>
+					<h2>{value}</h2>
 				</StyledTableTitle>
 
 				{!search ? (
