@@ -2,10 +2,20 @@ import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
 
 import background1 from "../asset/korea1.jpg";
-import { PiBowlFood, PiTree, PiThumbsUpBold } from "react-icons/pi";
-import topbg1 from "../asset/top_bg1.png";
-import topbg2 from "../asset/top_bg2.png";
-import topbg3 from "../asset/top_bg3.png";
+import {
+	PiBowlFood,
+	PiTree,
+	PiThumbsUpBold,
+	PiMountainsBold,
+	PiParkBold,
+} from "react-icons/pi";
+import { BiSolidCity } from "react-icons/bi";
+import topbg1 from "../asset/main_key/top_bg1.png";
+import topbg2 from "../asset/main_key/top_bg2.png";
+import topbg3 from "../asset/main_key/top_bg3.png";
+import regionbg1 from "../asset/main_region/region1.jpeg";
+import regionbg2 from "../asset/main_region/region2.jpeg";
+import regionbg3 from "../asset/main_region/region3.jpeg";
 
 const Container = styled.div`
 	font-family: "GmarketSansMedium";
@@ -264,40 +274,136 @@ const StyledMain3 = styled.div`
 	transition: all 0.8s;
 `;
 
-const StyledM3CardBox = styled.div`
-	width: 70%;
-	height: 55%;
-	padding: 1%;
+const StyledRegionBox = styled.div`
 	display: flex;
-	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
+	width: 70%;
 `;
 
-const StyledM3Card = styled.div`
-	width: 20%;
-	height: 45%;
-	margin: 1% 2%;
-	background-color: ${(props) => props.theme.mainColor};
+const StyledRegionSeoul = styled.div`
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	font-size: 40px;
-	&:hover {
-		background: skyblue;
-		color: #fff;
+	background-image: url(${regionbg1});
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	width: 300px;
+	height: 482px;
+	color: #fff;
+	margin: 15px;
+	border-radius: 30px;
+	transition: all 1s;
+	svg {
+		margin: 10px;
+		width: 25px;
+		height: 25px;
 	}
+	h3 {
+		margin: 0px;
+		color: #fff;
+		font-weight: bold;
+	}
+	p {
+		margin: 0px;
+		font-size: 15px;
+		visibility: hidden;
+		font-weight: bold;
+	}
+	&:hover {
+		transition: all 1.5s;
+		flex-grow: 1;
+		p {
+			visibility: visible;
+		}
+	}
+`;
 
-	@media screen and (max-width: 1024px) {
-		width: 46%;
-		height: 100px;
-		font-size: 22px;
+const StyledRegionIncheon = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-image: url(${regionbg2});
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	width: 300px;
+	height: 482px;
+	color: #fff;
+	margin: 15px;
+	border-radius: 30px;
+	transition: all 1s;
+	svg {
+		margin: 10px;
+		width: 25px;
+		height: 25px;
+	}
+	h3 {
+		margin: 0px;
+		color: #fff;
+		font-weight: bold;
+	}
+	p {
+		margin: 0px;
+		font-size: 15px;
+		visibility: hidden;
+		font-weight: bold;
+	}
+	&:hover {
+		transition: all 1.5s;
+		flex-grow: 1;
+		p {
+			visibility: visible;
+		}
+	}
+`;
+
+const StyledRegionJeju = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-image: url(${regionbg3});
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	width: 300px;
+	height: 482px;
+	color: #fff;
+	margin: 15px;
+	border-radius: 30px;
+	transition: all 1s;
+	svg {
+		margin: 10px;
+		width: 25px;
+		height: 25px;
+	}
+	h3 {
+		margin: 0px;
+		color: #fff;
+		font-weight: bold;
+	}
+	p {
+		margin: 0px;
+		font-size: 15px;
+		visibility: hidden;
+		font-weight: bold;
+	}
+	&:hover {
+		transition: all 1.5s;
+		flex-grow: 1;
+		p {
+			visibility: visible;
+		}
 	}
 `;
 
 function Main({ navigate }) {
 	let [scrollY, setScrollY] = useState(0);
-	const topKeyword = ["자연", "음식", "추천코스"];
 
 	const targetRef1 = useRef();
 	const targetRef2 = useRef();
@@ -387,89 +493,47 @@ function Main({ navigate }) {
 				</StyledTop3Box>
 			</StyledMain2>
 			<StyledMain3 ref={targetRef2}>
-				<StyledMtitle
-					onClick={() => {
-						navigate("/region");
-					}}
-				>
-					지역별 관광정보
-				</StyledMtitle>
-				<StyledMSub>
-					<div>원하는 지역별로 보고싶다면?</div>
-					<div>17개의 지역으로 구분되어있는 지역별 관광정보</div>
-				</StyledMSub>
-				<StyledM3CardBox>
-					<StyledM3Card
+				<StyledKeyTitle>
+					<h2
+						onClick={() => {
+							navigate("/region");
+						}}
+					>
+						지역별 관광정보
+					</h2>
+					<p>원하는 지역별로 보고싶다면?</p>
+					<p>17개의 지역으로 구분되어있는 지역별 관광정보</p>
+				</StyledKeyTitle>
+				<StyledRegionBox>
+					<StyledRegionSeoul
 						onClick={() => {
 							navigate("/region/list?type=서울");
 						}}
 					>
-						서울
-					</StyledM3Card>
-					<StyledM3Card
+						<BiSolidCity />
+						<h3>서울</h3>
+						<p>지역별로 보는 서울 관광지</p>
+					</StyledRegionSeoul>
+					<StyledRegionIncheon
 						onClick={() => {
 							navigate("/region/list?type=인천");
 						}}
 					>
-						인천
-					</StyledM3Card>
-					<StyledM3Card
+						<PiParkBold />
+						<h3>인천</h3>
+						<p>지역별로 보는 인천 관광지</p>
+					</StyledRegionIncheon>
+					<StyledRegionJeju
 						onClick={() => {
 							navigate("/region/list?type=제주도");
 						}}
 					>
-						제주도
-					</StyledM3Card>
-					<StyledM3Card
-						onClick={() => {
-							navigate("/region/list?type=강원도");
-						}}
-					>
-						강원도
-					</StyledM3Card>
-					<StyledM3Card
-						onClick={() => {
-							navigate("/region/list?type=경기도");
-						}}
-					>
-						경기도
-					</StyledM3Card>
-					<StyledM3Card
-						onClick={() => {
-							navigate("/region/list?type=대구");
-						}}
-					>
-						대구
-					</StyledM3Card>
-					<StyledM3Card
-						onClick={() => {
-							navigate("/region/list?type=부산");
-						}}
-					>
-						부산
-					</StyledM3Card>
-					<StyledM3Card
-						onClick={() => {
-							navigate("/region/list?type=대전");
-						}}
-					>
-						대전
-					</StyledM3Card>
-				</StyledM3CardBox>
+						<PiMountainsBold />
+						<h3>제주도</h3>
+						<p>지역별로 보는 제주도 관광지</p>
+					</StyledRegionJeju>
+				</StyledRegionBox>
 			</StyledMain3>
-			{/* <StyledMain4>
-				<StyledMtitle
-					onClick={() => {
-						navigate("/pet");
-					}}
-				>
-					반려동물 동반여행
-				</StyledMtitle>
-				<StyledMSub>
-					<div>반려동물과 함께 여행을 계획이 어려우셨나요?</div>
-					<div>그렇다면 반려동물 관광정보를 클릭해보세요</div>
-				</StyledMSub>
-			</StyledMain4> */}
 		</Container>
 	);
 }
