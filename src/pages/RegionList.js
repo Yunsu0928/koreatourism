@@ -36,7 +36,8 @@ const StyledDropMenu = styled.div`
 	justify-content: space-between;
 	margin-left: 14%;
 	margin-right: 14%;
-	padding: 1%;
+	padding: 40px;
+	background: #f5f5f5;
 	border: 4px dashed ${(props) => props.theme.mainColor};
 `;
 
@@ -50,7 +51,7 @@ const StyledTableTitle = styled.div`
 const StyledTableInput = styled.input`
 	width: 40%;
 	height: 100%;
-	border: 1px solid gray;
+	border: 1px solid #aaa;
 	border-radius: 20px;
 	padding: 5px 20px;
 	font-size: 15px;
@@ -58,17 +59,17 @@ const StyledTableInput = styled.input`
 
 const StyledDropDesign = styled.select`
 	width: 200px;
-	padding: 0.8em 0.5em;
-	font-family: "GmarketSansMedium";
-	background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
-		no-repeat 95% 50%;
-	border: 1px solid #999;
-	border-radius: 0px;
-	-webkit-appearance: none;
-	-moz-appearance: none;
+	background-color: #fff;
+	padding: 0.8rem 2rem;
+	font-family: GmarketSansMedium;
+	background-image: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg);
+	border: 1px solid rgb(153, 153, 153);
+	border-radius: 20px;
 	appearance: none;
-	.select option {
-		background: black;
+	background-repeat: no-repeat;
+	background-position: 160px 1px;
+	option {
+		background-color: white;
 	}
 `;
 
